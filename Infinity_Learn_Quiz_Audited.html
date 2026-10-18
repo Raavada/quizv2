@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Infinity Learn by Sri Chaitanya - Kids Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--saf:#ff9f1c;--pink:#ff4d8d;--teal:#0ea5a4;--ind:#4338ca;--cream:#fff8e7;--ink:#2b2350;--ok:#16a34a;--bad:#e11d48;--il-blue:#0072ce}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Baloo 2','Segoe UI',Tahoma,sans-serif}
+body{min-height:100vh;display:flex;justify-content:center;align-items:center;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px));color:var(--ink);
+background:linear-gradient(135deg,#ffd166,#ff8fab 55%,#a78bfa);background-attachment:fixed}
+.card{background:var(--cream);border:4px solid var(--ink);border-radius:28px;box-shadow:8px 8px 0 var(--ink);width:100%;max-width:640px;padding:24px;position:relative}
+.ctl{position:absolute;top:10px;right:12px;display:flex;gap:6px;z-index:2}
+.ctl button{width:38px;height:38px;border:3px solid var(--ink);border-radius:50%;background:#fff;font-size:1.1rem;cursor:pointer}
+.ctl button.off{opacity:.4}
+.screen{display:none}.screen.on{display:block;animation:pop .35s}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+
+/* Infinity Learn Brand Banner */
+.brand-banner {
+  background: var(--il-blue);
+  color: #ffffff;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  padding: 12px 16px;
+  text-align: center;
+  margin-bottom: 16px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.brand-banner h1 {
+  color: #ffffff;
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 2px 2px 0 var(--ink);
+}
+.brand-banner .by-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  opacity: 0.95;
+  margin-top: 2px;
+}
+
+.sub{text-align:center;margin:6px 0 14px;font-weight:500}
+.hero{font-size:3rem;text-align:center;animation:bob 2s infinite ease-in-out;margin-bottom:4px}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-4deg)}}
+.lab{font-weight:800;margin:10px 0 6px}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{flex:1;min-width:64px;padding:9px 6px;border:3px solid var(--ink);border-radius:14px;background:#fff;font-size:1.02rem;font-weight:700;cursor:pointer;color:var(--ink)}
+.seg button.on{background:var(--saf);box-shadow:3px 3px 0 var(--ink)}
+.big{width:100%;margin-top:16px;padding:14px;border:3px solid var(--ink);border-radius:16px;background:var(--pink);color:#fff;font-size:1.3rem;font-weight:800;cursor:pointer;box-shadow:4px 4px 0 var(--ink)}
+.big:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:800;flex-wrap:wrap;padding-right:170px}
+.pill{background:var(--ind);color:#fff;padding:3px 12px;border-radius:20px;font-size:.9rem}
+.pill.s{background:var(--teal)}.pill.f{background:var(--saf);color:var(--ink)}
+.bar{height:14px;background:#fff;border:3px solid var(--ink);border-radius:10px;margin:10px 0 6px;overflow:hidden}
+.bar div{height:100%;width:0;background:repeating-linear-gradient(45deg,var(--teal),var(--teal) 10px,#2dd4bf 10px,#2dd4bf 20px);transition:width .4s}
+#shelf{min-height:26px;font-size:1.2rem;line-height:1.2;margin-bottom:6px}
+#shelf small{font-size:.8rem;font-weight:700;opacity:.7}
+.mas{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.mas span{font-size:2.6rem}
+.mas.hop span{animation:hop .5s}
+@keyframes hop{40%{transform:translateY(-14px) scale(1.2)}}
+.bub{background:#fff;border:3px solid var(--ink);border-radius:16px;padding:6px 12px;font-weight:700;flex:1}
+#qt{font-size:1.35rem;font-weight:700;line-height:1.3;margin:6px 0}
+.rd{border:2px solid var(--ink);border-radius:12px;background:#fff;padding:2px 10px;font-weight:700;cursor:pointer;font-size:.9rem;margin-bottom:4px}
+#vis{justify-content:center;align-items:center;background:#fff;border:3px dashed var(--ind);border-radius:18px;margin:8px 0 14px;padding:10px;min-height:90px}
+.em{font-size:2.1rem;text-align:center;line-height:1.3;word-break:break-word}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.opts{grid-template-columns:1fr}.top{padding-right:0;margin-top:40px}}
+.opt{padding:12px;border:3px solid var(--ink);border-radius:16px;background:#fff;font-size:1.25rem;font-weight:800;cursor:pointer;color:var(--ink);transition:transform .15s}
+.opt::first-letter{text-transform:uppercase}
+.opt:hover:not(:disabled){background:#e0e7ff;transform:translateY(-3px)}
+.opt:disabled{cursor:default}
+.opt.ok{background:#bbf7d0;border-color:var(--ok);animation:pop .4s}
+.opt.no{background:#fecdd3;border-color:var(--bad);animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+#ex{display:none;background:#e0f2fe;border:3px solid var(--ink);border-radius:16px;padding:12px 16px;margin-top:14px}
+#ex b{color:var(--ind);font-size:1.1rem}
+#ex li{list-style:none;margin-top:5px;font-weight:500}
+#nx{display:none;animation:pulse 1.2s infinite}
+@keyframes pulse{50%{transform:scale(1.03)}}
+.stars{font-size:3rem;text-align:center;margin:8px 0}
+.haul{font-size:1.6rem;text-align:center;line-height:1.4;word-break:break-word}
+.fall{position:fixed;top:-40px;font-size:1.8rem;pointer-events:none;z-index:9;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+.inp{width:100%;padding:10px 12px;margin-top:4px;border:3px solid var(--ink);border-radius:14px;background:#fff;font-size:1.05rem;font-weight:700;color:var(--ink)}
+.lab small{font-weight:500;opacity:.7}
+#rt{text-align:center;line-height:1.1;margin:4px 0;font-size:1.7rem}
+.cert{border:4px solid var(--ink);border-radius:20px;padding:14px;text-align:center;margin:10px 0;box-shadow:4px 4px 0 var(--ink)}
+.cert.a{background:#fff3b0}.cert.b{background:#c7e8ff}.cert.c{background:var(--ink);color:#fff}
+.cert-top{font-weight:800;letter-spacing:2px;font-size:.85rem;opacity:.85}
+.cert-name{font-size:clamp(2.6rem,12vw,3.8rem);font-weight:800;line-height:1.05;word-break:break-word;margin:6px 0;text-transform:capitalize}
+.cert-sub{font-weight:700;font-size:.9rem;opacity:.85}
+.cert-rank{font-size:1.5rem;font-weight:800;margin:8px 0 4px}
+.cert-line{font-weight:700}
+.cert-msg{font-weight:500;margin-top:6px}
+.lnk{display:block;margin:12px auto 0;background:none;border:none;font-weight:700;text-decoration:underline;cursor:pointer;color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="card">
+<div class="ctl">
+  <button id="rst" title="Restart Quiz" style="display:none;" onclick="restartQuiz()">🔄</button>
+  <button id="home" title="Quit to Main Menu" style="display:none;" onclick="quitToHome()">🏠</button>
+  <button id="snd" title="Sound and voice" onclick="tg('snd')">🔊</button>
+  <button id="mus" title="Music" onclick="tg('mus')">🎵</button>
+</div>
+
+<div class="screen on" id="sL">
+  <div class="hero">🔐</div>
+  <div class="brand-banner">
+    <h1>Infinity Learn</h1>
+    <div class="by-text">by Sri Chaitanya Educational Institutions</div>
+  </div>
+  <p class="sub">Please log in to continue</p>
+  <input class="inp" id="lp" type="password" placeholder="Password" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
+  <div id="le" style="color:var(--bad);font-weight:700;margin-top:6px;min-height:24px"></div>
+  <button class="big" style="margin-top:6px" onclick="doLogin()">Login</button>
+</div>
+
+<div class="screen" id="s0">
+  <div class="hero">♾️</div>
+  <div class="brand-banner">
+    <h1>Infinity Learn</h1>
+    <div class="by-text">by Sri Chaitanya Educational Institutions</div>
+  </div>
+  <p class="sub">Roar through Maths, English &amp; Science and collect stickers 🎉</p>
+  <div class="lab">👋 Test giver name</div>
+  <input class="inp" id="nmTaker" maxlength="40" placeholder="Type the student's name here">
+  <div class="lab">Subject</div>
+  <div class="seg">
+    <button class="on" onclick="sel('sub','Maths',this)">➗ Maths</button>
+    <button onclick="sel('sub','English',this)">📖 English</button>
+    <button onclick="sel('sub','EVS',this)">🌍 EVS / Science</button>
+    <button onclick="sel('sub','Maths+EVS',this)">🔀 Maths + EVS / Science</button>
+  </div>
+  <div class="lab">Class</div>
+  <div class="seg">
+    <button class="on" onclick="sel('cls','Class 1',this)">1</button>
+    <button onclick="sel('cls','Class 2',this)">2</button>
+    <button onclick="sel('cls','Class 3',this)">3</button>
+    <button onclick="sel('cls','Class 4',this)">4</button>
+    <button onclick="sel('cls','Class 5',this)">5</button>
+    <button onclick="sel('cls','Class 6',this)">6</button>
+    <button onclick="sel('cls','Class 7',this)">7</button>
+    <button onclick="sel('cls','Class 8',this)">8</button>
+    <button onclick="sel('cls','Class 9',this)">9</button>
+    <button onclick="sel('cls','Class 10',this)">10</button>
+  </div>
+  <div class="lab">Board</div>
+  <div class="seg">
+    <button class="on" onclick="sel('brd','CBSE',this)">CBSE</button>
+    <button onclick="sel('brd','ICSE',this)">ICSE</button>
+  </div>
+  <div class="lab">How many questions?</div>
+  <div class="seg">
+    <button class="on" onclick="sel('cnt',10,this)">Quick 10</button>
+    <button onclick="sel('cnt',15,this)">15</button>
+    <button onclick="sel('cnt',20,this)">Max 20</button>
+  </div>
+  <button class="big" onclick="start()">Let's Play! 🚀</button>
+  <button class="lnk" onclick="doLogout()">Logout</button>
+</div>
+
+<div class="screen" id="s1">
+  <div class="top"><span class="pill" id="nmp" style="background:var(--pink)"></span><span class="pill" id="bd"></span><span class="pill f" id="stk">🔥 0</span><span class="pill s" id="sc">⭐ 0</span></div>
+  <div class="bar"><div id="pg"></div></div>
+  <div id="shelf"></div>
+  <div class="mas" id="mas"><span>🦁</span><div class="bub" id="say">Let's go!</div></div>
+  <div id="qsub" class="pill" style="display:inline-block;margin:4px 0 0"></div>
+  <div id="qt"></div>
+  <button class="rd" onclick="talk(Q[i].t)">🔊 Read to me</button>
+  <div id="vis"></div>
+  <div class="opts" id="opts"></div>
+  <div id="ex"><b id="et"></b><ul id="es"></ul></div>
+  <button class="big" id="nx" onclick="next()">Next ➜</button>
+</div>
+
+<div class="screen" id="s2">
+  <div class="hero">🏆</div>
+  <h1 id="rt">Shabash!</h1>
+  <div class="stars" id="rs"></div>
+  <p class="sub" id="rp"></p>
+  <div id="cert"></div>
+  <div class="haul" id="hl"></div>
+  <button class="big" onclick="start()">Play Again 🔄</button>
+  <button class="big" style="background:var(--teal)" onclick="quitToHome()">Change Subject / Class</button>
+</div>
+
+</div>
+
+<script>
+/* ---------- CONFIG: edit these ---------- */
+const CFG={
+  PASSWORD:'deepanshee'    // login password (not case-sensitive)
+};
+let bestSt=0,NAME='';
+const kid=()=>$('nmTaker').value.trim().replace(/\b\w/g,c=>c.toUpperCase());
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function doLogin(){
+  if($('lp').value.trim().toLowerCase()===CFG.PASSWORD.toLowerCase()){
+    try{sessionStorage.setItem('qzUser','1')}catch(e){}
+    $('le').textContent='';$('lp').value='';show('s0');
+  }else $('le').textContent='Wrong password, try again';
+}
+function doLogout(){try{sessionStorage.removeItem('qzUser')}catch(e){}show('sL')}
+const S={sub:'Maths',cls:'Class 1',brd:'CBSE',cnt:10};
+const cn=()=>parseInt(S.cls.replace(/\D/g,''),10);   /* class number, works for 1-10 */
+const sl=s=>s.split('+').map(x=>x=='EVS'?(cn()>5?'Science':'EVS & GK'):x).join(' + ');   /* subject label */
+const gcd=(a,b)=>b?gcd(b,a%b):a;
+let rng,Q=[],i=0,sc=0,st=0,ok=0,done=false,AC,mute=false,musOn=true,bg,stk=[];
+const $=id=>document.getElementById(id);
+const ri=(a,b)=>a+Math.floor(rng()*(b-a+1)),pk=a=>a[ri(0,a.length-1)];
+const sh=a=>{a=[...a];for(let j=a.length-1;j>0;j--){const k=ri(0,j);[a[j],a[k]]=[a[k],a[j]]}return a};
+const shr=a=>{a=[...a];for(let j=a.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[a[j],a[k]]=[a[k],a[j]]}return a},rp=a=>a[Math.floor(Math.random()*a.length)];
+const seed=s=>()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+const uq=a=>[...new Set(a.map(String))];
+const near=(a,mn=0)=>sh([-1,1,-2,2,-3,3,-10,10,-5,5].map(d=>a+d).filter(x=>x>=mn&&x!=a)).slice(0,3);
+const mk=(t,v,a,ds,e)=>{
+  a=String(a);
+  const choices=[];
+  const add=x=>{x=String(x);if(x!==a&&!choices.includes(x))choices.push(x)};
+  (Array.isArray(ds)?ds:[]).forEach(add);
+
+  // If a distractor accidentally equals the answer (or another distractor),
+  // generate plausible alternatives instead of rendering fewer than four options.
+  const fraction=a.match(/^(-?\d+)\s*\/\s*(-?\d+)$/);
+  if(choices.length<3&&fraction){
+    const n=Number(fraction[1]),d=Number(fraction[2]);
+    [`${n+1}/${d}`,`${n-1}/${d}`,`${n}/${d+1}`,`${n}/${Math.max(1,d-1)}`,`${n+2}/${d}`].forEach(add);
+  }
+  const numeric=a.match(/^([^\d-]*)(-?\d+(?:\.\d+)?)(.*)$/);
+  if(choices.length<3&&numeric){
+    const prefix=numeric[1],value=Number(numeric[2]),suffix=numeric[3];
+    const decimals=(numeric[2].split('.')[1]||'').length;
+    const deltas=[1,-1,2,-2,3,-3,5,-5,10,-10,100,-100,7,-7,20,-20];
+    for(const delta of deltas){
+      const next=value+delta;
+      const formatted=decimals?next.toFixed(decimals):String(next);
+      add(`${prefix}${formatted}${suffix}`);
+      if(choices.length>=3)break;
+    }
+  }
+  ['None of these','All of these','Cannot be determined','Not listed'].forEach(x=>{if(choices.length<3)add(x)});
+  return{t,v,a,o:sh([a,...choices.slice(0,3)]),e};
+};
+const em=s=>`<div class="em">${s}</div>`;
+const NM={CBSE:['Aarav','Diya','Rohan','Priya','Kabir','Meera','Arjun','Isha'],ICSE:['Ananya','Vihaan','Sneha','Aditya','Riya','Krish','Tara','Yash']};
+const nm=()=>pk(NM[S.brd]);
+const IT=[['🥭','mangoes'],['🪁','kites'],['🪔','diyas'],['🏏','cricket bats'],['🎈','balloons'],['🍌','bananas'],['🌸','flowers'],['🐘','elephants'],['🦚','peacocks'],['⭐','stars'],['🍬','laddoos'],['🛺','auto-rickshaws']];
+const D=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MO=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MD=[31,28,31,30,31,30,31,31,30,31,30,31];
+const SHP={circle:c=>`<circle cx="50" cy="50" r="40" fill="${c}"/>`,square:c=>`<rect x="15" y="15" width="70" height="70" fill="${c}"/>`,triangle:c=>`<polygon points="50,10 10,88 90,88" fill="${c}"/>`,rectangle:c=>`<rect x="5" y="28" width="90" height="44" fill="${c}"/>`};
+const RM=['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX','XX'];
+const rom=n=>['','X','XX','XXX','XL','L'][n/10|0]+RM[n%10];
+const tm=(h,m)=>`${h}:${String(m).padStart(2,'0')}`;
+const clock=(h,m)=>{const p=(a,l)=>`x2="${50+l*Math.sin(a*Math.PI/180)}" y2="${50-l*Math.cos(a*Math.PI/180)}"`;let n='';for(let k=1;k<=12;k++)n+=`<text x="${50+35*Math.sin(k*Math.PI/6)}" y="${54-35*Math.cos(k*Math.PI/6)}" font-size="9" font-weight="bold" text-anchor="middle">${k}</text>`;return `<svg width="150" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#fff" stroke="#4338ca" stroke-width="3"/>${n}<line x1="50" y1="50" ${p(h%12*30+m/2,22)} stroke="#e11d48" stroke-width="4" stroke-linecap="round"/><line x1="50" y1="50" ${p(m*6,33)} stroke="#2b2350" stroke-width="2.5" stroke-linecap="round"/><circle cx="50" cy="50" r="3"/></svg>`};
+const pie=(n,k)=>{let s='';for(let j=0;j<n;j++){const a=j*2*Math.PI/n,b=(j+1)*2*Math.PI/n,f=x=>`${50+45*Math.sin(x)} ${50-45*Math.cos(x)}`;s+=`<path d="M50 50 L${f(a)} A45 45 0 0 1 ${f(b)}Z" fill="${j<k?'#ff9f1c':'#fff1c9'}" stroke="#2b2350" stroke-width="2"/>`}return `<svg width="150" viewBox="0 0 100 100">${s}</svg>`};
+const rect=(l,w,u)=>`<svg width="230" viewBox="0 0 230 130"><rect x="40" y="25" width="${l*10}" height="${w*7}" fill="#c7d2fe" stroke="#4338ca" stroke-width="3"/><text x="${40+l*5}" y="18" text-anchor="middle" font-weight="bold" font-size="13">${l} ${u}</text><text x="${46+l*10}" y="${25+w*3.5}" font-weight="bold" font-size="13">${w} ${u}</text></svg>`;
+const frs=(n,k)=>[`${n-k}/${n}`,`${k}/${n+1}`,`${k+1}/${n}`,`${k}/${n+2}`,`1/${n}`];
+
+/* ---------- CLASS 1 SCREENSHOT QUESTIONS GENERATOR ---------- */
+const getC1Generators = () => [
+  () => mk('If Rahul has 5 apples and gives 2 to his friend, how many apples does Rahul have left?', em('🍎🍎🍎🍎🍎'), '3', ['2', '4', '5'], ['Subtraction 🍎', ['Start with 5 apples.', 'Take away 2: 5 − 2 = 3.']]),
+  () => mk('Which shape looks like a box or a dice?', '', 'Cube', ['Circle', 'Square', 'Triangle'], ['3D Shapes 🎲', ['A box or dice is 3D and has 6 square faces, so it is a cube.']]),
+  () => mk('If I cut a cake 3 times, can I get 8 pieces? If yes, then how?', '', 'Yes, by cutting 2 times vertically and 1 time horizontally through the middle', ['No, it is impossible', 'Yes, by cutting 3 times vertically', 'Yes, by cutting diagonally only'], ['Cake Puzzle 🎂', ['Cutting 2 times vertically makes 4 pieces.', 'Cutting once horizontally cuts all 4 pieces in half, giving 8 pieces!']]),
+  () => mk('Which of these numbers is even?', '', '4', ['3', '5', '7'], ['Even numbers 👯', ['An even number can be split into pairs with none left over.', '4 is even because it can be grouped into 2 pairs.']]),
+  () => {const a=ri(1,9),b=ri(1,10);return mk(`${a} + ${b} = ?`,'',a+b,near(a+b,0),['Addition ➕',[`Start at ${a} and count ${b} more.`,`${a} + ${b} = ${a+b}.`]])},
+  () => {const a=ri(8,20),b=ri(1,7);return mk(`${a} − ${b} = ?`,'',a-b,near(a-b,0),['Subtraction ➖',[`Start at ${a} and count back ${b}.`,`${a} − ${b} = ${a-b}.`]])},
+  () => {const n=ri(3,10),[e]=pk(IT);return mk('How many do you see?',em(e.repeat(n)),n,near(n,1),['Counting 👀',['Touch each picture once and count.',`There are ${n}.`]])},
+  () => {const n=ri(2,48),t=ri(0,1);return mk(`Which number comes ${t?'after':'before'} ${n}?`,'',t?n+1:n-1,near(t?n+1:n-1,0),['Before and after 🔢',[`${t?'After':'Before'} ${n} comes ${t?n+1:n-1}.`]])},
+  () => {const x=ri(1,50);let y=ri(1,50);if(x==y)y++;const b=ri(0,1),a=b?Math.max(x,y):Math.min(x,y);return mk(`Which number is ${b?'bigger':'smaller'}: ${x} or ${y}?`,'',a,[x,y,...near(a,0)],['Compare numbers ⚖️',[`The ${b?'bigger':'smaller'} number is ${a}.`]])},
+  () => {const t=ri(1,9),o=ri(0,9),n=t*10+o;return mk(`In ${n}, how many tens are there?`,'',t,near(t,0),['Tens and ones 🏠',[`${n} = ${t} tens and ${o} ones.`]])},
+  () => {const s=pk([2,5,10]),a=s*ri(1,3),n=a+3*s;return mk(`Count by ${s}s: ${[0,1,2].map(k=>a+k*s).join(', ')}, __`,'',n,near(n,0),['Skip counting 🐸',[`Jump by ${s} each time.`,`Next number: ${n}.`]])},
+  () => {const a=ri(2,9),x=ri(1,10);return mk(`Find the missing number: ${a} + __ = ${a+x}`,'',x,near(x,0),['Missing number 🕵️',[`${a+x} − ${a} = ${x}.`]])},
+  () => {const T=pk([['triangle',3],['square',4],['rectangle',4]]);return mk(`How many sides does a ${T[0]} have?`,'',T[1],[3,4,5,6],['Shapes 🔺',[`A ${T[0]} has ${T[1]} sides.`]])},
+  () => {const a=ri(1,6),b=ri(1,5);return mk(`${nm()} has ${a} toys. A friend gives ${b} more. How many toys now?`,'',a+b,near(a+b,0),['Add the toys 🧸',[`${a} + ${b} = ${a+b}.`]])}
+];
+
+/* ---------- MATHS ---------- */
+const G={
+'Class 1': getC1Generators(),
+'Class 2':[
+()=>{const a=ri(11,60),b=ri(11,39);return mk(`${a} + ${b} = ?`,'',a+b,near(a+b),['Add tens and ones ➕',[`Ones: ${a%10} + ${b%10} = ${a%10+b%10}.`,`Tens: ${a-a%10} + ${b-b%10} = ${a+b-a%10-b%10}.`,`Total = ${a+b}.`]])},
+()=>{const a=ri(30,99),b=ri(10,a-5);return mk(`${a} − ${b} = ?`,'',a-b,near(a-b),['Subtract ➖',[`Take away ${b} from ${a}.`,`${a} − ${b} = ${a-b}.`]])},
+()=>{const a=pk([2,3,4,5,10]),b=ri(1,10);return mk(`${a} × ${b} = ?`,'',a*b,near(a*b,1),[`Table of ${a} ✖️`,[`${a} × ${b} means ${b} groups of ${a}.`,`${a} × ${b} = ${a*b}.`]])},
+()=>{const n=ri(101,999),t=ri(0,2),a=[Math.floor(n/100),Math.floor(n/10)%10,n%10][t];return mk(`In ${n}, which digit is in the ${['hundreds','tens','ones'][t]} place?`,'',a,[(a+1)%10,(a+2)%10,(a+5)%10,(a+7)%10],['Place value 🏠',[`${n} = ${Math.floor(n/100)} hundreds, ${Math.floor(n/10)%10} tens, ${n%10} ones.`,`Answer: ${a}.`]])},
+()=>{const n=pk([2,3,4,6,8]),k=ri(1,n-1);return mk('What fraction of the shape is orange?',pie(n,k),`${k}/${n}`,frs(n,k),['Fractions 🍕',[`Count all equal parts: ${n}.`,`Count orange parts: ${k}.`,`Fraction = ${k}/${n}.`]])},
+()=>{const h=ri(1,12),m=pk([0,30]),a=tm(h,m);return mk('What time does the clock show?',clock(h,m),a,[tm(h%12+1,m),tm((h+10)%12+1,m),tm(h,30-m)],['Read the clock ⏰',['The short red hand shows the hour.',m?'The long hand points at 6, so it is half past.':'The long hand points at 12, so it is o\'clock.',`Time is ${a}.`]])},
+()=>{const a=ri(5,45),b=ri(5,45),s=ri(0,1),t=ri(60,100);return s?mk(`${nm()} pays ₹${t} for a toy that costs ₹${a}. How much change comes back?`,'',`₹${t-a}`,near(t-a,1).map(x=>'₹'+x),['Find the change 💰',[`₹${t} − ₹${a} = ₹${t-a}.`]]):mk(`A pencil costs ₹${a} and an eraser costs ₹${b}. What is the total?`,'',`₹${a+b}`,near(a+b,1).map(x=>'₹'+x),['Add the prices 💰',[`₹${a} + ₹${b} = ₹${a+b}.`]])},
+()=>{const x=ri(100,999);let y=ri(100,999);if(x==y)y++;const b=ri(0,1),a=b?Math.max(x,y):Math.min(x,y);return mk(`Which number is ${b?'greater':'smaller'}: ${x} or ${y}?`,'',a,[x,y,...near(a,0)],['Compare 3-digit numbers ⚖️',['Compare hundreds first, then tens, then ones.',`The ${b?'greater':'smaller'} number is ${a}.`]])},
+()=>{const s=pk([2,3,4,5,10]),a=s*ri(1,4),n=a+4*s;return mk(`What comes next? ${[0,1,2,3].map(k=>a+k*s).join(', ')}, __`,'',n,near(n),['Skip counting 🐸',[`Jump by ${s} each time.`,`Next number: ${n}.`]])},
+()=>{const[e,p]=pk(IT),a=ri(2,5),b=ri(2,10);return mk(`${nm()} has ${a} bags with ${b} ${p} in each bag. How many ${p} in all?`,a*b<=30?em(e.repeat(b)+'<br>').repeat(a):'',a*b,near(a*b,1),['Groups! 👜',[`${a} bags × ${b} each.`,`${a} × ${b} = ${a*b}.`]])},
+()=>{const a=ri(5,40),x=ri(5,50);return mk(`Find the missing number: __ + ${a} = ${a+x}`,'',x,near(x,1),['Missing number 🕵️',[`Subtract: ${a+x} − ${a} = ${x}.`]])},
+()=>{const j=ri(0,11),f=ri(0,1),a=MO[(j+(f?1:11))%12];return mk(`Which month comes ${f?'after':'before'} ${MO[j]}?`,'',a,sh(MO.filter(x=>x!=a&&x!=MO[j])),['Months of the year 🗓️',[`There are 12 months, from January to December.`,`${f?'After':'Before'} ${MO[j]} comes ${a}.`]])},
+()=>{const e=2*ri(1,49),o=[1,3,5,7].map(k=>2*ri(1,49)+k-1+(k>1?0:0)).map(x=>x%2?x:x+1);return mk('Which of these is an even number?','',e,o,['Even numbers 👯',['Even numbers end in 0, 2, 4, 6 or 8.',`${e} is even.`]])}
+],
+'Class 3':[
+()=>{const a=ri(120,600),b=ri(120,390);return mk(`${a} + ${b} = ?`,'',a+b,near(a+b),['Add 3-digit numbers ➕',[`Add ones, then tens, then hundreds.`,`${a} + ${b} = ${a+b}.`]])},
+()=>{const a=ri(300,999),b=ri(101,a-50);return mk(`${a} − ${b} = ?`,'',a-b,near(a-b),['Subtract 3-digit numbers ➖',['Subtract ones, then tens, then hundreds (borrow if needed).',`${a} − ${b} = ${a-b}.`]])},
+()=>{const a=ri(11,60),b=ri(2,9);return mk(`${a} × ${b} = ?`,'',a*b,near(a*b,1),['Multiply ✖️',[`${a} × ${b} = ${a*b}.`,`Check: ${a} added ${b} times.`]])},
+()=>{const b=ri(2,9),q=ri(2,12);return mk(`${b*q} ÷ ${b} = ?`,'',q,near(q,1),['Divide ➗',[`Ask: ${b} times what makes ${b*q}?`,`${b} × ${q} = ${b*q}, so the answer is ${q}.`]])},
+()=>{const l=ri(4,15),w=ri(2,l-1),s=ri(0,3);return s?mk('What is the perimeter of this rectangle?',rect(l,w,'cm'),`${2*(l+w)} cm`,near(2*(l+w),1).map(x=>x+' cm'),['Perimeter 📏',['Perimeter = add all 4 sides.',`${l} + ${w} + ${l} + ${w} = ${2*(l+w)} cm.`]]):mk(`A square garden has sides of ${l} m. What is its perimeter?`,'',`${4*l} m`,near(4*l,1).map(x=>x+' m'),['Perimeter of a square 🌳',[`A square has 4 equal sides.`,`4 × ${l} = ${4*l} m.`]])},
+()=>{const[a,b]=pk([[1,2],[1,3],[2,3],[1,4],[3,4],[2,5],[1,5]]),m=ri(2,5);return mk(`${a}/${b} = __/${b*m}`,'',a*m,near(a*m,1),['Equivalent fractions 🧩',[`Multiply top and bottom by ${m}.`,`${a} × ${m} = ${a*m}, ${b} × ${m} = ${b*m}.`]])},
+()=>{const h=ri(1,12),m=pk([5,10,15,20,25,35,40,45,50]),a=tm(h,m);return mk('What time does the clock show?',clock(h,m),a,[tm(h,(m+15)%60||5),tm(h%12+1,m),tm(h,(m+35)%60||10)],['Read the clock ⏰',['Short hand = hour. Long hand = minutes.',`Each number on the clock is 5 minutes. Time is ${a}.`]])},
+()=>{const t=ri(0,2),n=ri(2,9);return t==0?mk(`${n} m = ? cm`,'',n*100,[n*10,n*1000,n*100+10],['Metres to cm 📐',['1 m = 100 cm.',`${n} × 100 = ${n*100} cm.`]]):t==1?mk(`${n} km = ? m`,'',n*1000,[n*100,n*10000,n*1000+100],['Km to metres 🛣️',['1 km = 1000 m.',`${n} × 1000 = ${n*1000} m.`]]):mk(`${n} kg = ? g`,'',n*1000,[n*100,n*10000,n*1000+100],['Kg to grams ⚖️',['1 kg = 1000 g.',`${n} × 1000 = ${n*1000} g.`]])},
+()=>{const n=ri(11,989),t=ri(0,1),u=t?100:10,a=Math.round(n/u)*u;return mk(`Round ${n} to the nearest ${u}.`,'',a,[a+u,a-u,a+2*u],['Rounding 🎯',[`Look at the ${t?'tens':'ones'} digit.`,`If it is 5 or more, round up. So ${n} → ${a}.`]])},
+()=>{const p=5*ri(4,19);return mk(`${nm()} pays ₹100 for a book that costs ₹${p}. How much change comes back?`,'',`₹${100-p}`,near(100-p,1).map(x=>'₹'+x),['Change from ₹100 💰',[`₹100 − ₹${p} = ₹${100-p}.`]])},
+()=>{const n=ri(1,20),wrong=sh(RM.slice(1).filter(x=>x!==RM[n])).slice(0,3);return mk(`Which is the Roman numeral for ${n}?`,'',RM[n],wrong,['Roman numerals 🏛️',['I = 1, V = 5, X = 10.',`${n} is written ${RM[n]}.`]])},
+()=>{const[e,p]=pk(IT),a=ri(6,12),b=ri(3,9);return mk(`A box holds ${a} ${p}. How many ${p} are in ${b} boxes?`,'',a*b,near(a*b,1),['Word problem 📦',[`${b} boxes × ${a} each.`,`${b} × ${a} = ${a*b}.`]])},
+()=>{const s=ri(2,30),d=ri(3,12),q=[0,1,2,3].map(k=>s+k*d),n=s+4*d;return mk(`Find the next number: ${q.join(', ')}, __`,'',n,near(n),['Number pattern 🔮',[`The gap is ${d} each time.`,`${q[3]} + ${d} = ${n}.`]])},
+()=>{const n=ri(1000,9999),p=ri(0,3),d=Math.floor(n/10**p)%10;if(!d)return G['Class 3'][2]();const v=d*10**p;return mk(`What is the value of the digit ${d} in ${n}?`,'',v,[d,d*10,d*100,d*1000,d*10**((p+1)%4)],['Place value 🏠',[`The digit ${d} is in the ${['ones','tens','hundreds','thousands'][p]} place.`,`Its value is ${v}.`]])},
+()=>{const j=ri(0,11);return mk(`How many days does ${MO[j]} have in a common year?`,'',MD[j],[28,29,30,31],['Days in a month 🗓️',['In a common year, February has 28 days.','April, June, September and November have 30 days; the other months have 31.']])}
+],
+'Class 4':[
+()=>{const a=ri(1200,6000),b=ri(1000,3900);return mk(`${a} + ${b} = ?`,'',a+b,near(a+b),['Add 4-digit numbers ➕',['Add ones, tens, hundreds, then thousands. Carry when needed.',`${a} + ${b} = ${a+b}.`]])},
+()=>{const a=ri(3000,9999),b=ri(1000,a-500);return mk(`${a} − ${b} = ?`,'',a-b,near(a-b),['Subtract 4-digit numbers ➖',['Start from the ones and borrow when needed.',`${a} − ${b} = ${a-b}.`]])},
+()=>{const a=ri(12,49),b=ri(11,29),t=b-b%10;return mk(`${a} × ${b} = ?`,'',a*b,near(a*b,1),['Multiply ✖️',[`Split ${b} into ${t} and ${b%10}.`,`${a} × ${t} = ${a*t}, ${a} × ${b%10} = ${a*(b%10)}.`,`${a*t} + ${a*(b%10)} = ${a*b}.`]])},
+()=>{const b=ri(3,9),q=ri(5,20),r=ri(1,b-1),n=b*q+r;return mk(`What is the remainder when ${n} ÷ ${b}?`,'',r,near(r),['Remainder 🧮',[`${b} × ${q} = ${b*q}.`,`${n} − ${b*q} = ${r}, so the remainder is ${r}.`]])},
+()=>{const n=pk([5,6,8,10,12]),a=ri(1,n-3),b=ri(1,n-a-1);return mk(`${a}/${n} + ${b}/${n} = ?`,'',`${a+b}/${n}`,[`${a+b}/${2*n}`,`${a*b}/${n}`,`${a+b+1}/${n}`,`${a+b}/${n+1}`],['Add fractions 🍕',['Same bottom number? Add only the tops.',`${a} + ${b} = ${a+b}, so the answer is ${a+b}/${n}.`]])},
+()=>{const l=ri(4,15),w=ri(2,l-1);return mk('What is the area of this rectangle?',rect(l,w,'cm'),`${l*w} sq cm`,[`${2*(l+w)} sq cm`,`${l+w} sq cm`,`${l*w+10} sq cm`],['Area 🟦',['Area = length × width.',`${l} × ${w} = ${l*w} sq cm.`]])},
+()=>{const n=ri(21,49);return mk(`Which is the Roman numeral for ${n}?`,'',rom(n),[rom(n+1),rom(n-1),rom(n+10),rom(n-2)],['Roman numerals 🏛️',['X = 10, XX = 20, XXX = 30, XL = 40.',`${n} is written ${rom(n)}.`]])},
+()=>{const h=ri(2,9),t=ri(0,1);return t?mk(`${h} hours = ? minutes`,'',h*60,near(h*60,1),['Hours to minutes ⏳',['1 hour = 60 minutes.',`${h} × 60 = ${h*60}.`]]):mk(`${h} weeks = ? days`,'',h*7,near(h*7,1),['Weeks to days 🗓️',['1 week = 7 days.',`${h} × 7 = ${h*7}.`]])},
+()=>{const m=ri(3,9),a=m*ri(3,12);return mk(`Which of these is a multiple of ${m}?`,'',a,[a+1,a+2,a-1],['Multiples ✖️',[`Multiples of ${m} are in its table: ${m}, ${m*2}, ${m*3} …`,`${a} = ${m} × ${a/m}.`]])},
+()=>{const p=ri(12,45),n=ri(3,9);return mk(`One notebook costs ₹${p}. What is the cost of ${n} notebooks?`,'',`₹${p*n}`,near(p*n,1).map(x=>'₹'+x),['Shopping time 🛍️',[`${n} × ₹${p} = ₹${p*n}.`]])}
+],
+'Class 5':[
+()=>{const a=ri(11,99)/10,b=ri(11,99)/10,s=a+b,f=x=>x.toFixed(1);return mk(`${f(a)} + ${f(b)} = ?`,'',f(s),[f(s+.1),f(s-.1),f(s+1),f(s-1)],['Add decimals ➕',['Line up the decimal points and add.',`${f(a)} + ${f(b)} = ${f(s)}.`]])},
+()=>{const p=pk([10,20,25,50]),n=pk([40,60,80,100,200]),r=n*p/100;return mk(`What is ${p}% of ${n}?`,'',r,near(r,1),['Percentages ％',[`${p}% means ${p} out of 100.`,`${n} × ${p} ÷ 100 = ${r}.`]])},
+()=>{const L=pk([[4,6,12,2],[6,8,24,2],[8,12,24,4],[9,12,36,3],[10,15,30,5],[12,18,36,6],[6,9,18,3]]),t=ri(0,1),a=t?L[3]:L[2];return mk(`What is the ${t?'HCF':'LCM'} of ${L[0]} and ${L[1]}?`,'',a,near(a,1),[t?'HCF 🔗':'LCM 🔗',[t?'HCF is the biggest number that divides both.':'LCM is the smallest number that both divide into.',`Answer: ${a}.`]])},
+()=>{const L=pk([[1,2,1,4,'3/4'],[1,2,1,3,'5/6'],[1,3,1,6,'1/2'],[2,3,1,6,'5/6']]);return mk(`${L[0]}/${L[0]==2?3:L[0]==1&&L[2]==1&&L[3]==6?3:2} + ${L[2]}/${L[3]} = ?`,'',L[4],['2/5','2/7','1/5','3/8'],['Unlike fractions 🍰',['Make the bottom numbers the same first.',`The answer is ${L[4]}.`]])},
+()=>{const b=ri(10,40),d=ri(1,6);return mk(`What is the average of ${b-d}, ${b} and ${b+d}?`,'',b,near(b,1),['Average 📊',['Average = total ÷ number of items.',`${b-d} + ${b} + ${b+d} = ${3*b}, and ${3*b} ÷ 3 = ${b}.`]])},
+()=>{const s=ri(2,6);return mk(`What is the volume of a cube with side ${s} cm?`,'',`${s**3} cubic cm`,[`${6*s*s} cubic cm`,`${3*s} cubic cm`,`${s**3+s} cubic cm`],['Volume 🧊',['Volume of a cube = side × side × side.',`${s} × ${s} × ${s} = ${s**3} cubic cm.`]])},
+()=>{const a=ri(2,9),b=ri(2,6),c=ri(2,6);return mk(`${a} + ${b} × ${c} = ?`,'',a+b*c,[(a+b)*c,a+b+c,a*b+c],['BODMAS 🧠',['Multiply first, then add.',`${b} × ${c} = ${b*c}, then ${a} + ${b*c} = ${a+b*c}.`]])},
+()=>{const p=pk([100,200,300,400,500]);return mk(`A toy costs ₹${p}. With a 10% discount, how much will you pay?`,'',`₹${p*.9}`,[`₹${p*.1}`,`₹${p*.8}`,`₹${p*.85}`],['Discount 🏷️',[`10% of ₹${p} = ₹${p*.1}.`,`₹${p} − ₹${p*.1} = ₹${p*.9}.`]])},
+()=>{const s=pk([40,50,60,80]),t=ri(2,5);return mk(`A car goes ${s} km every hour. How far will it go in ${t} hours?`,'',`${s*t} km`,near(s*t,1).map(x=>x+' km'),['Distance 🚗',['Distance = speed × time.',`${s} × ${t} = ${s*t} km.`]])}
+],
+'Class 6':[
+()=>{const a=ri(5,30),b=ri(5,30);return mk(`(−${a}) + ${b} = ?`,'',b-a,near(b-a,-100),['Integers ➕➖',[`Start at −${a} on the number line and move ${b} steps right.`,`−${a} + ${b} = ${b-a}.`]])},
+()=>{const L=pk([[4,6],[6,8],[8,12],[9,12],[10,15],[12,18],[6,9],[14,21]]),t=ri(0,1),g=gcd(L[0],L[1]),a=t?g:L[0]*L[1]/g;return mk(`What is the ${t?'HCF':'LCM'} of ${L[0]} and ${L[1]}?`,'',a,near(a,1),[t?'HCF 🔗':'LCM 🔗',[t?'HCF is the biggest number that divides both.':'LCM is the smallest number that both divide into.',`Answer: ${a}.`]])},
+()=>{const P=pk([[2,3],[2,4],[3,6],[4,8],[3,4],[2,5]]),b=P[0],d=P[1],a=ri(1,b-1),c=ri(1,d-1),n=a*d+c*b,m=b*d,g=gcd(n,m);return mk(`${a}/${b} + ${c}/${d} = ?`,'',`${n/g}/${m/g}`,[`${a+c}/${b+d}`,`${n/g+1}/${m/g}`,`${n/g}/${m/g+1}`,`${a*c}/${m/g}`],['Unlike fractions 🍰',[`Make the bottoms equal: ${b} × ${d} = ${m}.`,`${a}×${d} + ${c}×${b} = ${n}, so ${n}/${m} = ${n/g}/${m/g}.`]])},
+()=>{const l=ri(4,15),w=ri(2,l-1);return mk('What is the area of this rectangle?',rect(l,w,'cm'),`${l*w} sq cm`,[`${2*(l+w)} sq cm`,`${l+w} sq cm`,`${l*w+10} sq cm`],['Area 🟦',['Area = length × width.',`${l} × ${w} = ${l*w} sq cm.`]])},
+()=>{const a=ri(50,99)/10,b=ri(11,49)/10,f=x=>x.toFixed(1),s=a-b;return mk(`${f(a)} − ${f(b)} = ?`,'',f(s),[f(s+.1),f(s-.1),f(s+1),f(s-1)],['Subtract decimals ➖',['Line up the decimal points and subtract.',`${f(a)} − ${f(b)} = ${f(s)}.`]])},
+()=>{const P=pk([[1,2],[2,3],[3,4],[3,5],[2,5],[4,5]]),k=ri(2,6),x=P[0],y=P[1];return mk(`Write the ratio ${x*k} : ${y*k} in simplest form.`,'',`${x}:${y}`,[`${y}:${x}`,`${x+1}:${y}`,`${x}:${y+1}`],['Ratio ⚖️',[`Divide both numbers by their HCF, ${k}.`,`${x*k} ÷ ${k} = ${x}, ${y*k} ÷ ${k} = ${y}.`]])},
+()=>{const a=ri(10,80),t=ri(0,1),r=t?180-a:90-a;return mk(`What is the ${t?'supplement':'complement'} of ${a}°?`,'',`${r}°`,near(r,1).map(x=>x+'°'),['Angles 📐',[t?'Supplementary angles add up to 180°.':'Complementary angles add up to 90°.',`${t?180:90} − ${a} = ${r}.`]])},
+()=>{const x=ri(3,25),a=ri(2,30);return mk(`Solve: x + ${a} = ${x+a}`,'',x,near(x,1),['Simple equation 🕵️',[`Subtract ${a} from both sides.`,`x = ${x+a} − ${a} = ${x}.`]])},
+()=>{const n=ri(11,25);return mk(`What is ${n}² ?`,'',n*n,near(n*n,1),['Squares 🔲',[`${n}² = ${n} × ${n}.`,`${n} × ${n} = ${n*n}.`]])},
+()=>{const p=pk([10,20,25,50]),n=pk([40,60,80,100,200,300]),r=n*p/100;return mk(`What is ${p}% of ${n}?`,'',r,near(r,1),['Percentages ％',[`${p}% means ${p} out of 100.`,`${n} × ${p} ÷ 100 = ${r}.`]])},
+()=>{const p=pk([11,13,17,19,23,29,31,37]);return mk('Which of these is a prime number?','',p,sh([9,15,21,25,27,33,35,39,49]).slice(0,3),['Prime numbers 🔢',['A prime number has exactly two factors: 1 and itself.',`${p} has no other factor, so it is prime.`]])}
+],
+'Class 7':[
+()=>{const a=ri(2,12),b=ri(2,9);return mk(`(−${a}) × ${b} = ?`,'',-a*b,[a*b,-a*b-a,-a*b+b],['Integer rules ✖️',['Negative × positive = negative.',`${a} × ${b} = ${a*b}, so the answer is −${a*b}.`]])},
+()=>{const x=ri(2,12),a=ri(2,9),b=ri(1,20);return mk(`Solve: ${a}x + ${b} = ${a*x+b}`,'',x,near(x,1),['Solve for x 🕵️',[`Subtract ${b}: ${a}x = ${a*x}.`,`Divide by ${a}: x = ${x}.`]])},
+()=>{const p=pk([10,20,25,40,50]),c=pk([200,400,500,800]),s=c*(100+p)/100;return mk(`An article bought for ₹${c} is sold for ₹${s}. What is the profit percent?`,'',`${p}%`,[5,10,15,20,25,30,40,50].filter(x=>x!=p).slice(0,3).map(x=>x+'%'),['Profit % 💹',[`Profit = ₹${s} − ₹${c} = ₹${s-c}.`,`Profit % = ${s-c} ÷ ${c} × 100 = ${p}%.`]])},
+()=>{const P=pk([1000,2000,5000]),R=pk([5,8,10]),T=ri(2,5),I=P*R*T/100;return mk(`Find the simple interest on ₹${P} at ${R}% per year for ${T} years.`,'',`₹${I}`,[I+P,I/2,I+R*T].map(x=>'₹'+x),['Simple interest 🏦',['SI = P × R × T ÷ 100.',`${P} × ${R} × ${T} ÷ 100 = ₹${I}.`]])},
+()=>{const m=ri(10,40);return mk(`Find the mean of ${sh([m-4,m-1,m,m+2,m+3]).join(', ')}.`,'',m,near(m,1),['Mean 📊',['Mean = sum ÷ number of values.',`Sum = ${5*m}, and ${5*m} ÷ 5 = ${m}.`]])},
+()=>{const a=ri(30,80),b=ri(30,90);return mk(`Two angles of a triangle are ${a}° and ${b}°. Find the third angle.`,'',`${180-a-b}°`,near(180-a-b,1).map(x=>x+'°'),['Triangle angle sum 🔺',['The three angles of a triangle add up to 180°.',`180 − ${a} − ${b} = ${180-a-b}.`]])},
+()=>{const b=2*ri(2,10),h=ri(3,14);return mk(`What is the area of a triangle with base ${b} cm and height ${h} cm?`,'',`${b*h/2} sq cm`,[`${b*h} sq cm`,`${b+h} sq cm`,`${b*h/2+5} sq cm`],['Triangle area 🔺',['Area = ½ × base × height.',`½ × ${b} × ${h} = ${b*h/2} sq cm.`]])},
+()=>{const a=ri(2,5),m=ri(2,6),n=ri(2,6);return mk(`${a}^${m} × ${a}^${n} = ${a}^?`,'',m+n,[m*n,m+n+1,m+n-1],['Laws of exponents ⚡',['When bases are the same, add the powers.',`${m} + ${n} = ${m+n}.`]])},
+()=>{const T=pk([[3,4,5],[5,12,13],[8,15,17],[6,8,10],[9,12,15]]);return mk(`A right triangle has sides ${T[0]} cm and ${T[1]} cm. Find the hypotenuse.`,'',`${T[2]} cm`,near(T[2],1).map(x=>x+' cm'),['Pythagoras 📐',['Hypotenuse² = a² + b².',`${T[0]}² + ${T[1]}² = ${T[0]**2+T[1]**2} = ${T[2]}².`]])},
+()=>{const k=ri(1,3),r=7*k;return mk(`Find the circumference of a circle of radius ${r} cm. (Use π = 22/7)`,'',`${44*k} cm`,near(44*k,1).map(x=>x+' cm'),['Circle ⭕',['Circumference = 2πr.',`2 × 22/7 × ${r} = ${44*k} cm.`]])}
+],
+'Class 8':[
+()=>{const n=ri(12,30);return mk(`Find √${n*n}.`,'',n,near(n,1),['Square roots √',[`${n} × ${n} = ${n*n}.`,`So √${n*n} = ${n}.`]])},
+()=>{const n=ri(3,12);return mk(`Find the cube root of ${n**3}.`,'',n,near(n,1),['Cube roots ∛',[`${n} × ${n} × ${n} = ${n**3}.`,`So the cube root is ${n}.`]])},
+()=>{const x=ri(2,10),c=ri(1,4),a=c+ri(1,4),b=ri(1,15),d=b+(a-c)*x;return mk(`Solve: ${a}x + ${b} = ${c}x + ${d}`,'',x,near(x,1),['Equation with x on both sides ⚖️',[`Move x terms to the left: ${a-c}x = ${d-b}.`,`x = ${d-b} ÷ ${a-c} = ${x}.`]])},
+()=>{const a=ri(2,9);return mk(`(x + ${a})² = x² + __x + ${a*a}`,'',2*a,near(2*a,1),['Identity (a+b)² 🧠',['(a + b)² = a² + 2ab + b².',`Middle term = 2 × x × ${a} = ${2*a}x.`]])},
+()=>{const P=pk([1000,2000,5000,10000]);return mk(`Find the compound interest on ₹${P} for 2 years at 10% per year.`,'',`₹${P*21/100}`,[P/5,P/10,P*22/100].map(x=>'₹'+x),['Compound interest 🏦',['Amount after 2 years = P × 1.1 × 1.1 = 1.21 P.',`CI = 0.21 × ${P} = ₹${P*21/100}.`]])},
+()=>{const M=pk([500,800,1000,1200,2000]),d=pk([10,20,25]),s=M*(100-d)/100;return mk(`A shirt marked ₹${M} is sold at ${d}% discount. What is the selling price?`,'',`₹${s}`,[M*d/100,M-d,M*(100-d-5)/100].map(x=>'₹'+x),['Discount 🏷️',[`Discount = ${d}% of ₹${M} = ₹${M*d/100}.`,`Selling price = ₹${M} − ₹${M*d/100} = ₹${s}.`]])},
+()=>{const a=ri(4,12),b=ri(13,20),h=2*ri(2,6);return mk(`Parallel sides of a trapezium are ${a} cm and ${b} cm, and the height is ${h} cm. Find its area.`,'',`${(a+b)*h/2} sq cm`,[`${(a+b)*h} sq cm`,`${a*b*h/2} sq cm`,`${(a+b)*h/2+h} sq cm`],['Trapezium area ⏢',['Area = ½ × (sum of parallel sides) × height.',`½ × ${a+b} × ${h} = ${(a+b)*h/2} sq cm.`]])},
+()=>{const l=ri(3,12),b=ri(2,9),h=ri(2,8);return mk(`Find the volume of a cuboid ${l} cm × ${b} cm × ${h} cm.`,'',`${l*b*h} cubic cm`,[`${2*(l*b+b*h+h*l)} cubic cm`,`${l+b+h} cubic cm`,`${l*b*h+l} cubic cm`],['Volume 🧊',['Volume = length × breadth × height.',`${l} × ${b} × ${h} = ${l*b*h} cubic cm.`]])},
+()=>{const u=ri(5,30),x=ri(2,6),y=x+ri(2,6);return mk(`${x} pens cost ₹${u*x}. What is the cost of ${y} pens?`,'',`₹${u*y}`,near(u*y,1).map(v=>'₹'+v),['Direct proportion 🖊️',[`One pen costs ₹${u*x} ÷ ${x} = ₹${u}.`,`${y} pens cost ${y} × ₹${u} = ₹${u*y}.`]])},
+()=>{const s=sh([...Array(30).keys()].map(v=>v+1)).slice(0,5),t=[...s].sort((p,q)=>p-q),md=t[2];return mk(`Find the median of ${s.join(', ')}.`,'',md,near(md,1),['Median 📊',['Arrange the numbers in order and pick the middle one.',`Sorted: ${t.join(', ')}. Median = ${md}.`]])}
+],
+'Class 9':[
+()=>{const a=ri(1,6),b=a+ri(1,5);return mk(`Find the zeroes of x² − ${a+b}x + ${a*b}.`,'',`${a} and ${b}`,[`${-a} and ${-b}`,`${a} and ${-b}`,`${-a} and ${b}`],['Zeroes of a polynomial 🎯',[`Find two numbers with sum ${a+b} and product ${a*b}.`,`They are ${a} and ${b}.`]])},
+()=>{const x=ri(1,9)*pk([1,-1]),y=ri(1,9)*pk([1,-1]),q=x>0?(y>0?'I':'IV'):(y>0?'II':'III');return mk(`In which quadrant does the point (${x}, ${y}) lie?`,'',`Quadrant ${q}`,['I','II','III','IV'].filter(z=>z!=q).map(z=>'Quadrant '+z),['Coordinate plane 🗺️',['Quadrant I: (+,+), II: (−,+), III: (−,−), IV: (+,−).',`x is ${x>0?'positive':'negative'} and y is ${y>0?'positive':'negative'}, so it is Quadrant ${q}.`]])},
+()=>{const B=pk([50,100,200]),k=ri(1,9);return mk(`Using an identity, find ${B+k} × ${B-k}.`,'',B*B-k*k,[B*B+k*k,B*B-k,B*B-2*k*k],['Identity a² − b² ✨',['(a + b)(a − b) = a² − b².',`${B}² − ${k}² = ${B*B} − ${k*k} = ${B*B-k*k}.`]])},
+()=>{const n=ri(5,12);return mk(`What is the sum of the interior angles of a polygon with ${n} sides?`,'',`${(n-2)*180}°`,[`${n*180}°`,`${(n-1)*180}°`,`${(n-3)*180}°`],['Polygon angles 🔷',['Sum = (n − 2) × 180°.',`(${n} − 2) × 180° = ${(n-2)*180}°.`]])},
+()=>{const k=ri(1,3),h=ri(3,15);return mk(`Find the curved surface area of a cylinder with radius ${7*k} cm and height ${h} cm. (π = 22/7)`,'',`${44*k*h} sq cm`,[`${22*k*h} sq cm`,`${88*k*h} sq cm`,`${44*k*h+44} sq cm`],['Cylinder CSA 🥫',['CSA = 2πrh.',`2 × 22/7 × ${7*k} × ${h} = ${44*k*h} sq cm.`]])},
+()=>{const a=ri(1,6),b=ri(1,6);return mk(`If x = ${a}, y = ${b} is a solution of 2x + 3y = k, find k.`,'',2*a+3*b,near(2*a+3*b,1),['Linear equations in two variables 📈',[`Put x = ${a} and y = ${b}.`,`2(${a}) + 3(${b}) = ${2*a} + ${3*b} = ${2*a+3*b}.`]])},
+()=>{const irr=pk(['√2','√3','√5','√7','√11']);return mk('Which of these is an irrational number?','',irr,sh(['0.5','3/4','√4','√9','√16','22/7']).slice(0,3),['Rational or irrational? 🔢',['Rational numbers can be written as p/q.','The square root of a non-perfect square cannot, so it is irrational.']])},
+()=>{const r=ri(1,9),b=ri(10,15),t=r+b,g=gcd(r,t);return mk(`A bag has ${r} red and ${b} blue balls. What is the probability of drawing a red ball?`,'',`${r/g}/${t/g}`,[`${b/g}/${t/g}`,`${r}/${b}`,`1/${t}`],['Probability 🎲',['Probability = favourable outcomes ÷ total outcomes.',`${r} red out of ${t} balls = ${r}/${t} = ${r/g}/${t/g}.`]])},
+()=>{const a=ri(20,80);return mk(`Two lines intersect. One angle is ${a}°. Find the angle adjacent to it.`,'',`${180-a}°`,[`${a}°`,`${90-a}°`,`${360-a}°`],['Linear pair 📐',['Adjacent angles on a straight line add up to 180°.',`180 − ${a} = ${180-a}.`]])},
+()=>{const a=ri(2,5),m=ri(2,5),n=ri(2,5);return mk(`(${a}^${m})^${n} = ${a}^?`,'',m*n,[m+n,m*n+1,m*n-1],['Laws of exponents ⚡',['(aᵐ)ⁿ = aᵐˣⁿ, so multiply the powers.',`${m} × ${n} = ${m*n}.`]])}
+],
+'Class 10':[
+()=>{const a=ri(1,4),b=ri(2,9),c=ri(1,6),D=b*b-4*a*c;return mk(`Find the discriminant of ${a}x² + ${b}x + ${c} = 0.`,'',D,near(D,-100),['Discriminant 🔍',['D = b² − 4ac.',`${b}² − 4(${a})(${c}) = ${b*b} − ${4*a*c} = ${D}.`]])},
+()=>{const k=ri(1,4),a=ri(1,6),b=a+ri(1,5),s=a+b,p=a*b;return mk(`Find the sum of the zeroes of ${k}x² − ${k*s}x + ${k*p}.`,'',s,[p,-s,s+1],['Sum of zeroes ➕',['For ax² + bx + c, sum of zeroes = −b/a.',`−(−${k*s})/${k} = ${s}.`]])},
+()=>{const a=ri(2,20),d=ri(2,9),n=ri(8,20);return mk(`Find the ${n}th term of the AP: ${a}, ${a+d}, ${a+2*d}, …`,'',a+(n-1)*d,[a+n*d,a+(n-2)*d,a*n],['AP nth term 🪜',['aₙ = a + (n − 1)d.',`${a} + ${n-1} × ${d} = ${a+(n-1)*d}.`]])},
+()=>{const a=ri(2,10),d=ri(2,6),n=2*ri(3,6),T=n*(2*a+(n-1)*d)/2;return mk(`Find the sum of the first ${n} terms of the AP: ${a}, ${a+d}, ${a+2*d}, …`,'',T,near(T,1),['AP sum ➕',['Sₙ = n/2 × [2a + (n − 1)d].',`${n}/2 × [${2*a} + ${(n-1)*d}] = ${T}.`]])},
+()=>{const T=pk([['sin 30°','1/2'],['cos 60°','1/2'],['tan 45°','1'],['sin 60°','√3/2'],['cos 30°','√3/2'],['tan 30°','1/√3'],['sin 90°','1'],['cos 90°','0'],['tan 60°','√3']]);return mk(`What is the value of ${T[0]}?`,'',T[1],sh(['0','1/2','1','√3/2','1/√3','√3']).filter(x=>x!==T[1]).slice(0,3),['Trigonometric values 📐',['Remember the standard angle table for 0°, 30°, 45°, 60°, 90°.',`${T[0]} = ${T[1]}.`]])},
+()=>{const T=pk([[3,4,5],[5,12,13],[6,8,10],[8,15,17]]),x=ri(0,5),y=ri(0,5);return mk(`Find the distance between A(${x}, ${y}) and B(${x+T[0]}, ${y+T[1]}).`,'',T[2],near(T[2],1),['Distance formula 📏',['d = √[(x₂ − x₁)² + (y₂ − y₁)²].',`√(${T[0]}² + ${T[1]}²) = √${T[0]**2+T[1]**2} = ${T[2]}.`]])},
+()=>{const x=ri(-6,6),y=ri(-6,6),d=ri(1,5),e=ri(1,5);return mk(`Find the midpoint of A(${x}, ${y}) and B(${x+2*d}, ${y+2*e}).`,'',`(${x+d}, ${y+e})`,[`(${x+2*d}, ${y+e})`,`(${x+d}, ${y+2*e})`,`(${x+d+1}, ${y+e+1})`],['Midpoint formula 🎯',['Midpoint = ((x₁ + x₂)/2, (y₁ + y₂)/2).',`((${x} + ${x+2*d})/2, (${y} + ${y+2*e})/2) = (${x+d}, ${y+e}).`]])},
+()=>{const T=pk([['a prime number','1/2'],['an even number','1/2'],['a number greater than 4','1/3'],['a multiple of 3','1/3'],['a number less than 3','1/3'],['the number 6','1/6'],['a number less than 7','1']]);return mk(`A die is thrown once. What is the probability of getting ${T[0]}?`,'',T[1],sh(['1/6','1/3','1/2','2/3','5/6']).filter(x=>x!==T[1]).slice(0,3),['Probability 🎲',['Probability = favourable outcomes ÷ total outcomes (6).',`For ${T[0]}, the probability is ${T[1]}.`]])},
+()=>{const d=ri(5,20),t=ri(0,1);return mk(`The angle of elevation of the top of a tower from a point ${d} m from its foot is ${t?60:45}°. Find the height of the tower.`,'',t?`${d}√3 m`:`${d} m`,t?[`${d} m`,`${d}/√3 m`,`${2*d} m`]:[`${d}√3 m`,`${2*d} m`,`${d}/2 m`],['Heights and distances 🗼',['Height = distance × tan(angle).',t?`tan 60° = √3, so height = ${d}√3 m.`:`tan 45° = 1, so height = ${d} m.`]])},
+()=>{const k=ri(1,5);return mk(`Find the volume of a cone with radius 7 cm and height ${3*k} cm. (π = 22/7)`,'',`${154*k} cubic cm`,[`${462*k} cubic cm`,`${154*k+14} cubic cm`,`${77*k} cubic cm`],['Cone volume 🍦',['V = ⅓ × π × r² × h.',`⅓ × 22/7 × 49 × ${3*k} = ${154*k} cubic cm.`]])},
+()=>{const P=pk([[1,2],[2,3],[3,4],[2,5],[3,5],[1,3]]),a=P[0],b=P[1];return mk(`Two similar triangles have sides in the ratio ${a}:${b}. What is the ratio of their areas?`,'',`${a*a}:${b*b}`,[`${a}:${b}`,`${a*a}:${b}`,`${b*b}:${a*a}`],['Similar triangles 🔺',['Ratio of areas = (ratio of sides)².',`${a}² : ${b}² = ${a*a} : ${b*b}.`]])},
+()=>{const h=ri(2,6),P=pk([[2,3],[3,4],[2,5],[3,5],[4,5],[1,3]]),A=h*P[0],B=h*P[1],L=h*P[0]*P[1];return mk(`The HCF of two numbers is ${h} and their LCM is ${L}. If one number is ${A}, find the other.`,'',B,near(B,1),['HCF × LCM 🔗',['Product of two numbers = HCF × LCM.',`Other number = ${h} × ${L} ÷ ${A} = ${B}.`]])}
+]};
+
+/* ---------- ENGLISH and EVS ---------- */
+const bk=L=>()=>{const[t,a,x,y,z,e]=pk(L).split('|');return mk(t,'',a,[x,y,z],['Let\'s learn! 💡',[e]])};
+const OP={A:'hot-cold,big-small,up-down,day-night,happy-sad,fast-slow,open-close,hard-soft',B:'hot-cold,big-small,early-late,empty-full,strong-weak,brave-scared,clean-dirty,rich-poor,light-heavy',C:'ancient-modern,generous-selfish,victory-defeat,expand-shrink,increase-decrease,accept-refuse,include-exclude,arrive-depart',D:'optimistic-pessimistic,transparent-opaque,voluntary-compulsory,temporary-permanent,rural-urban,fiction-fact,import-export,vertical-horizontal',E:'benevolent-malevolent,scarce-abundant,verbose-concise,hostile-amicable,superior-inferior,inflate-deflate,exterior-interior,mortal-immortal'};
+const op=b=>()=>{const L=OP[b].split(','),p=pk(L).split('-'),f=ri(0,1),w=p[f],a=p[1-f];return mk(`What is the opposite of "${w}"?`,'',a,sh(L.join('-').split('-').filter(x=>x!=w&&x!=a)),['Opposites 🔄',[`${w} ↔ ${a}`]])};
+const PL={A:'cat:cats,dog:dogs,box:boxes,bus:buses,baby:babies,child:children,man:men,foot:feet',B:'box:boxes,baby:babies,child:children,mouse:mice,leaf:leaves,tooth:teeth,city:cities,woman:women,knife:knives',C:'wolf:wolves,goose:geese,ox:oxen,potato:potatoes,country:countries,person:people,sheep:sheep,fly:flies',D:'wife:wives,half:halves,loaf:loaves,hero:heroes,volcano:volcanoes,shelf:shelves,thief:thieves,deer:deer',E:'analysis:analyses,crisis:crises,bacterium:bacteria,phenomenon:phenomena,cactus:cacti,nucleus:nuclei,thesis:theses,radius:radii'};
+const pl=b=>()=>{const p=pk(PL[b].split(',')).split(':'),s=p[0];return mk(`What is the plural of "${s}"?`,'',p[1],[s+'s',s+'es',s.slice(0,-1)+'ies',s+'en'],['Plurals 👯',[`${s} → ${p[1]}`]])};
+const EA=['A cat says __.|meow|moo|woof|quack|A cat says meow 🐱','Which one is a colour?|Green|Chair|Run|Book|Green is a colour 🎨','I __ a happy boy.|am|is|are|be|Use "am" with "I".','Which word starts with the letter S?|Sun|Moon|Tree|Fish|Sun starts with S ☀️','Which is an animal?|Elephant|Table|Pencil|Bus|An elephant is an animal 🐘','She __ a girl.|is|am|are|be|Use "is" with she, he and it.','This is __ apple.|an|a|the|two|Use "an" before the sounds a, e, i, o, u.','Fill in the blank: I saw __ elephant at the zoo.|an|a|the|none|Use "an" before a vowel sound like elephant.','Rahul studies in __ University.|a|an|the|none|University starts with a yoo sound, so we use "a".','Which word is a naming word (noun)? The cat is sleeping.|cat|sleeping|The|is|A noun names an animal, person, place or thing.'];
+const EB=['They __ playing in the park.|are|is|am|was|Use "are" with they, we and you.','Which is a noun?|Elephant|Quickly|Jump|Bright|A noun names a person, place, animal or thing.','Which is a verb (action word)?|Run|Table|Blue|Tall|Verbs show actions.','He __ to school daily.|goes|go|going|gone|Use "goes" with he, she and it.','Which is an adjective?|Beautiful|Sing|Slowly|Table|Adjectives describe nouns.','Yesterday I __ to the market.|went|go|goes|going|"Went" is the past of "go".','A group of birds is called a __.|flock|herd|pack|pride|A group of birds is a flock 🐦'];
+const EC=['Which word is an adverb?|Quickly|Quick|Quicker|Quickest|Adverbs tell how an action is done.','Which sentence is in the past tense?|We played cricket.|We play cricket.|We will play cricket.|We are playing cricket.|"Played" is the past form.','Neither of the boys __ late.|was|were|are|be|"Neither" takes a singular verb.','A group of lions is called a __.|pride|herd|flock|pack|A group of lions is a pride 🦁','Which mark ends a question?|?|.|!|,|A question mark ends a question.','Which is a synonym (same meaning) of "big"?|Huge|Tiny|Thin|Short|Huge means very big.','She is __ than her sister. (tall)|taller|tallest|more tall|most tall|Add -er to compare two people.'];
+const ED=['He has been living here __ 2015.|since|for|from|during|Use "since" with a point in time.','Identify the conjunction: "I wanted to go, but it rained."|but|wanted|rained|go|"But" joins two clauses.','The passive form of "She wrote a letter" is:|A letter was written by her.|A letter is written by her.|A letter wrote her.|She was written a letter.|Passive uses be + past participle.','Choose the correct preposition: He is good __ maths.|at|in|on|with|We say "good at" a subject.','Which word is a pronoun?|they|table|run|green|Pronouns replace nouns.','Choose the correct sentence.|If I were you, I would study.|If I was you, I would study.|If I am you, I will studied.|If I be you, I would study.|Use "were" in an imaginary condition.','The synonym of "rapid" is:|fast|slow|weak|late|Rapid means fast.','He said, "I am happy." In indirect speech: He said that he __ happy.|was|is|am|were|The verb shifts back in tense.','Which is a compound word?|sunflower|beautiful|running|happily|Sun + flower makes sunflower.','Choose the correct spelling.|Necessary|Neccessary|Necesary|Neccesary|Necessary has one c and two s.','The collective noun for a group of fish is a __.|school|herd|pack|flock|A group of fish is a school.','Which sentence is in the future tense?|They will visit Jaipur.|They visited Jaipur.|They visit Jaipur.|They have visited Jaipur.|"Will" shows the future.','Identify the figure of speech: "The moon is a silver coin."|Metaphor|Simile|Personification|Hyperbole|It compares directly without using like or as.'];
+const EE=['Choose the correct sentence.|Each of the students has finished.|Each of the students have finished.|Each of the students are finished.|Each of the students were finishing.|"Each" takes a singular verb.','Identify the figure of speech: "Her voice is music to my ears."|Metaphor|Simile|Alliteration|Irony|It is a direct comparison.','Change to passive: "The teacher is explaining the lesson."|The lesson is being explained by the teacher.|The lesson is explained by the teacher.|The lesson was being explained by the teacher.|The lesson has been explained by the teacher.|Present continuous passive: is being + past participle.','Hardly had he arrived __ it started raining.|when|than|then|while|"Hardly ... when" is the correct pair.','Which is a complex sentence?|Although it rained, we went out.|We went out.|It rained and we stayed.|Go out now.|It has a main clause and a subordinate clause.','Choose the correct spelling.|Accommodation|Acommodation|Accomodation|Acomodation|Accommodation has double c and double m.','The idiom "a piece of cake" means:|very easy|very tasty|very small|very costly|It means something very easy.','If he had studied, he __ passed.|would have|will have|would|had|Third conditional uses "would have".','Which word is closest in meaning to "benevolent"?|kind|cruel|lazy|proud|Benevolent means kind and well-meaning.','Identify the part of speech of "quickly" in "She ran quickly."|Adverb|Adjective|Noun|Verb|It tells how she ran, so it is an adverb.','She said, "I will call you." She said that she __ call me.|would|will|shall|can|Will changes to would in reported speech.','Which sentence has correct subject-verb agreement?|Neither of them was ready.|Neither of them were ready.|Neither of them are ready.|Neither of them be ready.|"Neither" is singular.','Choose the correct preposition: She is fond __ music.|of|at|for|with|"Fond of" is correct.','The device in "Peter Piper picked a peck" is:|Alliteration|Onomatopoeia|Simile|Oxymoron|Repeating the same starting sound is alliteration.'];
+const VA=['Which animal gives us milk?|Cow|Lion|Snake|Eagle|Cows give us milk 🐄','We see with our __.|eyes|ears|nose|hands|Eyes help us see 👀','Which one is a fruit?|Mango|Potato|Onion|Carrot|Mango is a sweet fruit 🥭','Which is our national bird?|Peacock|Crow|Sparrow|Parrot|The peacock is India\'s national bird 🦚','Plants need __ to grow.|water and sunlight|toys|sweets|plastic|Plants drink water and love sunlight 🌱','Which season is the hottest?|Summer|Winter|Spring|Autumn|Summer is hot ☀️','Which part of a plant stays under the soil and drinks water?|Roots|Stem|Leaves|Flower|Roots grow underground and absorb water 🌿','How many colours are there in a rainbow?|7|5|6|8|A rainbow has 7 colours: VIBGYOR 🌈','Which animal is called the ship of the desert?|Camel|Elephant|Lion|Horse|Camels travel far in hot sand with little water 🐫'];
+const VB=['Which is our national animal?|Tiger|Lion|Elephant|Deer|The tiger is India\'s national animal 🐯','Which gas does the human body use for respiration?|Oxygen|Carbon dioxide|Smoke|Helium|Cells use oxygen during respiration.','The Sun is a __.|star|planet|moon|comet|The Sun is a star ☀','Which organ pumps blood?|Heart|Lungs|Brain|Stomach|The heart pumps blood ❤️','Which part of a plant takes water from the soil?|Roots|Leaves|Flowers|Fruits|Roots drink water 🌿','Which of these is a herbivore (plant eater)?|Cow|Lion|Tiger|Crocodile|Cows eat grass and plants.','Water freezes into __.|ice|steam|smoke|dew|Freezing water becomes ice 🧊'];
+const VC=['What is the capital of India?|New Delhi|Mumbai|Kolkata|Chennai|New Delhi is India\'s capital 🏛','Which is the largest planet?|Jupiter|Earth|Mars|Venus|Jupiter is the biggest planet 🪐','Plants make food by __.|photosynthesis|digestion|evaporation|melting|Photosynthesis uses sunlight, water and air.','Which vitamin do we get from sunlight?|Vitamin D|Vitamin C|Vitamin A|Vitamin B|Sunlight gives us Vitamin D ☀️','Which gas do plants take in?|Carbon dioxide|Oxygen|Nitrogen|Hydrogen|Plants breathe in carbon dioxide.','Who is called the Father of the Nation?|Mahatma Gandhi|Jawaharlal Nehru|Subhas Bose|Sardar Patel|Gandhiji led India\'s freedom movement.','Which river is commonly identified as India\'s longest by total length?|Ganga|Yamuna|Godavari|Narmada|The Ganga is commonly identified as India\'s longest river by total length. 🌊'];
+/* Science, Classes 6-8 */
+/* Complete the primary EVS/GK pools to 20 unique questions per class band. */
+VA.push(
+  `Which body part helps us hear sounds?|Ears|Eyes|Nose|Elbows|Ears help us hear sounds.`,
+  `Which of these is a domestic animal?|Dog|Tiger|Lion|Fox|Dogs commonly live with people.`,
+  `Which object gives us light during the day?|Sun|Moon|Chair|Tree|The Sun is our main natural light source during the day.`,
+  `What should we do before eating food?|Wash our hands|Touch our shoes|Play in mud|Skip washing|Washing hands helps remove dirt and germs.`,
+  `Which of these is a source of water?|River|Book|Pencil|Shoe|Rivers contain flowing water.`,
+  `Which season is usually coldest in much of India?|Winter|Summer|Monsoon|Hot season|Winter is generally the coldest season in many parts of India.`,
+  `Which animal lives in water?|Fish|Camel|Cow|Hen|Fish live in water.`,
+  `Which of these is a means of transport?|Bus|Pillow|Cup|Plate|A bus carries people from place to place.`,
+  `What do we use to keep our teeth clean?|Toothbrush|Comb|Spoon|Eraser|A toothbrush helps clean teeth.`,
+  `Which part of a plant is usually green and makes food?|Leaf|Root|Seed|Bark|Leaves make food using sunlight.`,
+  `Who helps treat people when they are sick?|Doctor|Carpenter|Tailor|Gardener|Doctors care for sick people.`
+);
+VB.push(
+  `Which body organs help us breathe?|Lungs|Heart|Stomach|Kidneys|The lungs help us breathe.`,
+  `Which of these is a living thing?|Tree|Rock|Chair|Pencil|A tree grows and carries out life processes.`,
+  `What is the change from liquid water to ice called?|Freezing|Melting|Boiling|Evaporation|Water freezes when it changes from liquid to solid.`,
+  `Which natural object gives Earth most of its light and heat?|Sun|Moon|Cloud|River|The Sun is Earth's main natural source of light and heat.`,
+  `Which material is attracted to a magnet?|Iron|Wood|Plastic|Paper|Iron is attracted to a magnet.`,
+  `Which organ helps us think and remember?|Brain|Heart|Lungs|Stomach|The brain helps us think and remember.`,
+  `What do bees collect from flowers to help make honey?|Nectar|Pebbles|Sand|Soil|Bees collect nectar from flowers.`,
+  `Which planet do we live on?|Earth|Mars|Venus|Jupiter|Earth is the planet we live on.`,
+  `Which is a renewable source of energy?|Sunlight|Coal|Petrol|Natural gas|Sunlight is naturally replenished.`,
+  `Which part of a plant supports it and carries water?|Stem|Flower|Fruit|Seed|The stem supports the plant and transports water.`,
+  `What is the main source of energy for most food chains?|Sun|Moon|Soil|Rocks|Most food chains begin with energy from the Sun.`,
+  `Steam is water in which state?|Gas|Solid|Liquid|Ice|Steam is water in the gas state.`,
+  `Which sense organ helps us smell?|Nose|Ear|Eye|Hand|The nose helps us smell.`,
+  `What do we call animals that eat only plants?|Herbivores|Carnivores|Omnivores|Decomposers|Herbivores eat plants.`
+);
+VC.push(
+  `Which layer of the atmosphere helps protect us from harmful ultraviolet rays?|Ozone layer|Cloud layer|Soil layer|Ocean layer|The ozone layer absorbs much of the Sun's harmful ultraviolet radiation.`,
+  `What is the change from water vapour to liquid water called?|Condensation|Evaporation|Melting|Freezing|Condensation changes water vapour into liquid droplets.`,
+  `Which force opposes motion between surfaces that rub together?|Friction|Gravity|Magnetism|Buoyancy|Friction opposes relative motion between surfaces.`,
+  `Which simple machine is used in a seesaw?|Lever|Pulley|Screw|Wedge|A seesaw works as a lever.`,
+  `Which of these animals has a backbone?|Frog|Earthworm|Snail|Jellyfish|A frog is a vertebrate and has a backbone.`,
+  `Which gas is produced by our bodies and exhaled in greater concentration than we inhale?|Carbon dioxide|Helium|Hydrogen|Neon|We exhale air with more carbon dioxide than we inhale.`,
+  `What is an important function of plant roots?|Absorb water and anchor the plant|Make seeds|Attract insects|Produce flowers|Roots absorb water and help anchor a plant.`,
+  `Which of these is a fossil fuel?|Coal|Wind|Sunlight|Flowing water|Coal is a fossil fuel.`,
+  `Which instrument measures rainfall?|Rain gauge|Thermometer|Compass|Ammeter|A rain gauge measures the amount of rainfall.`,
+  `Which change is usually reversible?|Melting ice|Burning paper|Rusting iron|Cooking an egg|Melted water can be frozen back into ice.`,
+  `Which material is a good conductor of electricity?|Copper|Rubber|Wood|Glass|Copper conducts electricity well.`,
+  `Which celestial body orbits a planet?|Moon|Star|Galaxy|Nebula|A moon is a natural satellite that orbits a planet.`,
+  `Which organ pumps blood around the human body?|Heart|Lungs|Stomach|Brain|The heart pumps blood through the circulatory system.`
+);
+const VD=['Which part of the cell contains the genetic material?|Nucleus|Cell wall|Vacuole|Ribosome|The nucleus holds the DNA.','The process by which plants make food is called __.|photosynthesis|respiration|transpiration|digestion|Plants use sunlight, water and carbon dioxide.','What is the chemical formula of water?|H2O|CO2|O2|NaCl|Water has 2 hydrogen atoms and 1 oxygen atom.','Which force pulls objects towards the Earth?|Gravity|Friction|Magnetism|Tension|Gravity attracts objects to the Earth.','The SI unit of force is the __.|Newton|Joule|Watt|Pascal|Force is measured in newtons.','Which gas is released by plants during photosynthesis?|Oxygen|Carbon dioxide|Nitrogen|Hydrogen|Plants release oxygen.','Which of these is a good conductor of electricity?|Copper|Rubber|Wood|Plastic|Metals like copper conduct electricity.','The pH of a neutral solution is __.|7|0|14|1|Pure water has pH 7.','Which planet is known as the Red Planet?|Mars|Venus|Jupiter|Saturn|Mars looks red because of iron oxide.','Which instrument measures temperature?|Thermometer|Barometer|Ammeter|Voltmeter|A thermometer measures temperature.','Which vitamin prevents scurvy?|Vitamin C|Vitamin A|Vitamin D|Vitamin K|Lack of vitamin C causes scurvy.','Which mirror is used as a car rear-view mirror?|Convex|Concave|Plane|Cylindrical|Convex mirrors give a wider field of view.','Rusting of iron needs oxygen and __.|water|oil|nitrogen|helium|Iron rusts in air and moisture.','The change of a liquid into a gas is called __.|evaporation|condensation|freezing|melting|Liquid to gas is evaporation.','Which organ absorbs most of the digested food?|Small intestine|Stomach|Liver|Large intestine|Absorption mainly happens in the small intestine.','Speed is distance divided by __.|time|mass|force|volume|Speed = distance ÷ time.','Which of these is a non-renewable resource?|Coal|Sunlight|Wind|Water|Coal takes millions of years to form.','Which blood cells carry oxygen?|Red blood cells|White blood cells|Platelets|Plasma|Haemoglobin in red blood cells carries oxygen.','Which part of a flower develops into a fruit?|Ovary|Petal|Sepal|Anther|The ovary becomes the fruit.','Which gas do we need for burning?|Oxygen|Nitrogen|Helium|Argon|Fuel needs oxygen to burn.'];
+/* Science, Classes 9-10 */
+const VE=['The SI unit of work is the __.|Joule|Newton|Watt|Pascal|Work = force × distance, measured in joules.','The first law of motion is also called the law of __.|inertia|gravitation|acceleration|action|Objects keep their state of rest or motion unless a force acts.','The atomic number of an element is the number of __ in its nucleus.|protons|neutrons|electrons only|nucleons|Atomic number = number of protons.','Which gas is produced when zinc reacts with dilute HCl?|Hydrogen|Oxygen|Carbon dioxide|Chlorine|Metal + acid gives hydrogen gas.','The relation between voltage, current and resistance is __.|V = IR|V = I/R|I = VR|R = VI|Voltage = current × resistance.','The powerhouse of the cell is the __.|Mitochondria|Nucleus|Golgi body|Lysosome|Mitochondria release energy.','Which lens is used to correct short-sightedness (myopia)?|Concave lens|Convex lens|Bifocal lens|Plane lens|A concave lens diverges light rays.','The chemical name of baking soda is __.|Sodium hydrogen carbonate|Sodium carbonate|Calcium oxide|Sodium chloride|Baking soda is NaHCO3.','Which hormone controls the blood sugar level?|Insulin|Adrenaline|Thyroxine|Oestrogen|Insulin lowers blood glucose.','The unit of electric power is the __.|Watt|Volt|Ampere|Ohm|Power is measured in watts.','In 2H2 + O2 → 2H2O, the type of reaction is __.|Combination|Decomposition|Displacement|Double displacement|Two substances combine to form one.','Which of these is a vector quantity?|Velocity|Speed|Mass|Time|Velocity has magnitude and direction.','The focal length of a plane mirror is __.|Infinity|Zero|1 m|Equal to its radius|A plane mirror is flat, so its focal length is infinite.','Which part of a neuron receives signals?|Dendrite|Axon|Myelin|Synapse|Dendrites receive nerve impulses.','The pH of lemon juice is about __.|2|7|10|13|Lemon juice is acidic, so its pH is low.','Who proposed the laws of heredity?|Gregor Mendel|Charles Darwin|Louis Pasteur|Robert Hooke|Mendel experimented on pea plants.','The acceleration due to gravity on Earth is about __.|9.8 m/s²|1.6 m/s²|3.7 m/s²|98 m/s²|g is about 9.8 m/s².','Which element has the symbol Fe?|Iron|Fluorine|Lead|Tin|Fe comes from the Latin word ferrum.','The ozone layer protects us from __.|Ultraviolet rays|Infrared rays|Radio waves|Sound waves|Ozone absorbs harmful UV rays.','Which is the correct unit of pressure?|Pascal|Newton|Joule|Watt|Pressure = force per unit area, measured in pascals.'];
+const bnd=()=>{const c=cn();return c<3?'A':c==3?'B':c<6?'C':c<9?'D':'E'};
+const gens=(sub=S.sub)=>{
+  if(sub=='Maths')return G[S.cls];
+  const b=bnd();
+  return sub=='English'?[bk({A:EA,B:EB,C:EC,D:ED,E:EE}[b]),bk({A:EA,B:EB,C:EC,D:ED,E:EE}[b]),op(b),pl(b)]:[bk({A:VA,B:VB,C:VC,D:VD,E:VE}[b])];
+};
+
+/* Builds n questions for one subject (same fixed order every time, as before) */
+function buildOne(sub,n){
+  rng=seed(cn()*97+(S.brd=='CBSE'?1:2)*1013+['Maths','English','EVS'].indexOf(sub)*31);
+  const g=gens(sub),seen=new Set(),out=[];
+  for(let k=0;k<4000&&out.length<n;k++){const q=g[ri(0,g.length-1)]();const key=q.t+q.v;if(!seen.has(key)){seen.add(key);q.subject=sub;q.grade=S.cls;q.board=S.brd;q.pts=10;out.push(q)}}
+  return out;
+}
+/* Merged subjects (e.g. Maths+EVS) split the count equally; any odd one goes to the first subject */
+function build(){
+  const subs=S.sub.split('+'),n=Math.min(S.cnt,20);
+  const out=subs.flatMap((s,j)=>buildOne(s,Math.floor(n/subs.length)+(j<n%subs.length?1:0)));
+  return subs.length>1?shr(out):out;
+}
+function sel(k,v,b){S[k]=v;[...b.parentNode.children].forEach(x=>x.classList.toggle('on',x==b))}
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id==id));
+  $('rst').style.display = id === 's1' ? 'inline-block' : 'none';$('home').style.display = (id === 's1' || id === 's2') ? 'inline-block' : 'none';
+  if(id!='s1')bgm(0)
+}
+
+/* ---------- SOUND SYSTEM ---------- */
+const ac=()=>AC=AC||new(window.AudioContext||window.webkitAudioContext)();
+function note(f,t,d,type='sine',v=.15){try{const c=ac(),o=c.createOscillator(),g=c.createGain(),s=c.currentTime+t;o.type=type;o.frequency.value=f;o.connect(g);g.connect(c.destination);g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(v,s+.02);g.gain.exponentialRampToValueAtTime(.001,s+d);o.start(s);o.stop(s+d+.05)}catch(e){}}
+function play(k,n=0){if(mute)return;try{ac().resume()}catch(e){}
+  if(k=='tap'){note(880,0,.12,'sine',.1);return}
+  if(k=='ok'){const P=[523,659,784,1047,1319,1568].slice(0,Math.min(4+n,6));P.forEach((f,j)=>{note(f,j*.09,.6);note(f*2,j*.09,.3,'triangle',.04)})}
+  if(k=='no'){note(392,0,.45,'sine',.12);note(330,.2,.7,'sine',.1)}
+  if(k=='win'){[523,659,784,1047,784,1047,1319,1568].forEach((f,j)=>{note(f,j*.15,.55,'triangle',.14);note(f/2,j*.15,.55,'sine',.08)})}
+}
+function bgm(on=1){clearInterval(bg);bg=null;if(!on||!musOn||mute)return;const P=[392,440,523,587,659,784];let k=0;bg=setInterval(()=>{k++;note(rp(P),0,1,'sine',.045);if(k%4==0)note(rp(P)/2,0,1.6,'triangle',.03)},560)}
+function talk(t){if(mute||!window.speechSynthesis)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/__/g,' blank ').replace(/₹(\d+)/g,'$1 rupees').replace(/[^\w\s!'.,?%+=\/-]/g,' '));u.lang='en-IN';u.pitch=1.3;u.rate=.95;const v=speechSynthesis.getVoices().find(v=>/en-IN/i.test(v.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+function tg(w){if(w=='snd'){mute=!mute;if(mute&&window.speechSynthesis)speechSynthesis.cancel()}else musOn=!musOn;
+  $('snd').classList.toggle('off',mute);$('mus').classList.toggle('off',!musOn);$('snd').textContent=mute?'🔇':'🔊';
+  if($('s1').classList.contains('on'))bgm();play('tap')}
+
+function confetti(n){for(let k=0;k<n;k++){const s=document.createElement('span');s.className='fall';s.textContent=rp(['🎉','⭐','🪔','🌸','✨','🎈']);s.style.left=Math.random()*100+'vw';s.style.animationDuration=1.5+Math.random()*2+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),3800)}}
+
+/* ---------- GAME CONTROLS ---------- */
+const ST=['🦁','🐯','🐘','🦚','🐼','🦄','🐬','🦋','🌟','🍭','🚀','🏅'];
+const CHEER=['Shabash!','Wah! Kya baat hai!','Bahut badhiya!','Zabardast!','Superb!','Well done!'];
+const STREAK={2:'2 in a row! You are on fire! 🔥',3:'Hat-trick! Three in a row! 🎩⭐',4:'Four! You are unstoppable! 🚀',5:'FIVE in a row! Jungle King! 👑'};
+const OOPS=['No worries! Mistakes help us grow 🌱','Almost! You will get the next one 💪','Good try! Read the trick below 👇','Every champion slips sometimes 🦁'];
+const TEASE=['Next question 🎁','Ooh, what is next? 👀','Bring it on! 💥','One more sticker awaits! 🏅','Ready, champ? 🚀'];
+
+function restartQuiz(){
+  if(confirm("Restart the quiz from the beginning?")){
+    start();
+  }
+}
+
+function quitToHome(){
+  if($('s1').classList.contains('on')){
+    if(confirm("Are you sure you want to quit the quiz and return to the main menu?")){
+      show('s0');
+    }
+  } else {
+    show('s0');
+  }
+}
+
+function start(){
+  if(!kid()){alert('Please type your name first 😊');$('nmTaker').focus();return}
+  const built=build();if(built.length<S.cnt){alert(`Only ${built.length} unique questions are available for this selection. Please choose fewer questions or another subject.`);return}
+  Q=built.slice(0,S.cnt);i=0;sc=0;st=0;ok=0;stk=[];bestSt=0;NAME=kid();$('nmp').textContent='👤 '+NAME;
+  $('bd').textContent=`${sl(S.sub)} • ${S.cls} • ${S.brd}`;
+  show('s1');play('tap');bgm();load();talk(`Let's go, ${NAME}!`);
+}
+function load(){
+  done=false;const q=Q[i];
+  $('qt').textContent=`${i+1}. ${q.t}`;
+  $('qsub').textContent=q.subject==='EVS'?(cn()>5?'🔬 Science':'🌍 EVS & GK'):(q.subject==='Maths'?'➗ Maths':'📖 English');
+  const v=$('vis');v.innerHTML=q.v;v.style.display=q.v?'flex':'none';
+  $('opts').innerHTML='';
+  q.o.forEach(o=>{const b=document.createElement('button');b.className='opt';b.textContent=o;b.onclick=()=>pick(b,o);$('opts').appendChild(b)});$('ex').style.display='none';$('nx').style.display='none';$('say').textContent=i==0?`Let's go, ${NAME}! Win stickers 🎁`:rp(['You can do it! 💪','Think carefully 🤔','Take your time 🌈','Ready? Go! 🚀']);
+  $('pg').style.width=i/Q.length*100+'%';
+  $('sc').textContent='⭐ '+sc;$('stk').textContent='🔥 '+st;
+  $('shelf').innerHTML=stk.join(' ')+(stk.length?'':'<small>Answer right to collect stickers!</small>');
+}
+function pick(b,o){
+  if(done)return;done=true;const q=Q[i],good=o===q.a;
+  document.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(x.textContent===q.a)x.classList.add('ok')});
+  let msg;
+  if(good){sc+=10+Math.min(st,5)*2;st++;ok++;bestSt=Math.max(bestSt,st);stk.push(rp(ST));play('ok',st);confetti(10+Math.min(st,5)*4);
+    msg=STREAK[Math.min(st,5)]&&st>1?STREAK[Math.min(st,5)]:rp(CHEER)+' 🎉';
+    const m=$('mas');m.classList.remove('hop');void m.offsetWidth;m.classList.add('hop')}
+  else{b.classList.add('no');st=0;play('no');msg=rp(OOPS)}
+  if(i+1==Math.ceil(Q.length/2)&&Q.length>3)msg+=' Halfway there! 🎉';
+  $('say').textContent=msg;talk(msg);
+  $('sc').textContent='⭐ '+sc;$('stk').textContent='🔥 '+st;
+  $('shelf').innerHTML=stk.join(' ')+(stk.length?'':'<small>Answer right to collect stickers!</small>');
+  $('et').textContent=q.e[0];$('es').innerHTML=q.e[1].map(s=>`<li>👉 ${s}</li>`).join('');
+  $('ex').style.display='block';
+  const n=$('nx');n.style.display='block';n.textContent=i+1<Q.length?rp(TEASE):'See my result 🏆';
+}
+function next(){play('tap');i++;i<Q.length?load():finish()}
+function finish(){
+  const n=Q.length,p=ok/n,s=p>=.9?3:p>=.6?2:p>=.3?1:0,c=cn(),pc=Math.round(p*100),lv=p>=.9?0:p>=.6?1:p>=.3?2:3;
+  const sub=`${S.cls} • ${sl(S.sub)} • ${S.brd}`,date=new Date().toLocaleDateString('en-IN');
+  let k,hero,top,rank,head,msg,extra='';
+  if(c<=2){ /* little kids: jungle animals */
+    k='a';top='⭐ STAR CERTIFICATE ⭐';hero=['🦁','🐯','🐰','🐣'][lv];
+    rank=['Lion King 🦁','Tiger Cub 🐯','Bunny Hopper 🐰','Little Chick 🐣'][lv];
+    head=[`Roarrr! You did it, ${NAME}! 🎉`,`Wow ${NAME}, super job! 🌟`,`Good hopping, ${NAME}! 🐰`,`Nice try, ${NAME}! 🐣`][lv];
+    msg=['Everybody in the jungle is clapping for you! 👏','Almost a lion! A few more tries and you will roar louder! 🐯','Hop hop hooray! Every hop makes you stronger. Try again! 🥕','Little chicks grow into big eagles! Let\'s play again and win more stickers! 🐥'][lv];
+    extra=`You won ${stk.length} sticker${stk.length==1?'':'s'}! Show your parents 🎈`;
+  }else if(c==3){ /* middle: superheroes */
+    k='b';top='🦸 HERO CARD 🦸';hero=['🦸','⚡','🚀','🌱'][lv];
+    rank=['Super Genius 🦸','Power Star ⚡','Rising Hero 🚀','Hero in Training 🌱'][lv];
+    head=[`Mission complete, ${NAME}! 🦸`,`Great work, ${NAME}! ⚡`,`You are rising, ${NAME}! 🚀`,`Keep training, ${NAME}! 🌱`][lv];
+    msg=['Top score! The city is safe thanks to your brain power! 🧠','Strong powers! One more try to unlock Super Genius.','Your powers are growing. Replay the mission to level up!','Every superhero starts somewhere. Read the tricks and try again!'][lv];
+    extra=`Power points: ${sc} ⚡ • Hero stickers: ${stk.length}`;
+  }else{ /* older kids: achievements, levels, goals */
+    k='c';top='🏆 ACHIEVEMENT UNLOCKED';hero=['🏆','🥇','📈','🎯'][lv];
+    rank=['Quiz Grandmaster 🏆','Scholar 🥇','Contender 📈','Practice Mode 🎯'][lv];
+    head=[`Achievement unlocked, ${NAME}! 🏆`,`Level up, ${NAME}! 🥇`,`Solid effort, ${NAME}! 📈`,`Keep grinding, ${NAME}! 🎯`][lv];
+    msg=['Outstanding accuracy. Try a bigger set or the next class for a tougher challenge.','Strong performance. Fix the ones you missed and you will hit Grandmaster.','You are in the game. Review the explanations for the misses, then replay to beat your score.','Everyone starts in practice mode. Read each explanation and replay.'][lv];
+    extra=ok<n?`🎯 Next goal: beat ${ok}/${n} — the questions stay the same, so you can measure your progress.`:'💯 Perfect score! Can you do it again with a bigger set?';
+  }
+  document.querySelector('#s2 .hero').textContent=hero;
+  $('rs').textContent='⭐'.repeat(s)+'☆'.repeat(3-s);
+  $('rt').textContent=head;
+  $('rp').textContent=`${ok} out of ${n} correct • ${sc} points`;
+  $('cert').innerHTML=`<div class="cert ${k}"><div class="cert-top">${top}</div><div class="cert-name">${esc(NAME)}</div><div class="cert-sub">${esc(sub)} • ${date}</div><div class="cert-rank">${rank}</div><div class="cert-line">${ok} / ${n} correct • ${pc}% • 🔥 best streak ${bestSt}</div><div class="cert-msg">${msg}</div></div>`;
+  $('hl').innerHTML=(extra?`<div style="font-size:1rem;font-weight:700;margin-bottom:6px">${extra}</div>`:'')+(stk.length?`${c<=3?'Your stickers':'Badges earned'}:<br>${stk.join(' ')}`:'Play again to win your first sticker! 🎁');
+  show('s2');play('win');talk(head);if(s>0)confetti(50);
+}
+try{if(sessionStorage.getItem('qzUser'))show('s0')}catch(e){}
+</script>
+</body>
+</html>
